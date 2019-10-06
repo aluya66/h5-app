@@ -1,38 +1,18 @@
-/* eslint-disable quote-props */
-/* eslint-disable prefer-destructuring */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-restricted-globals */
-/* eslint-disable no-unused-expressions */
 import axios from 'axios'
 import env, {
   serializeParam
-  // getRandomNum
 } from 'utils'
 
 import {
   getStore,
   setStore
 } from 'utils/store'
-// import {
-//   getCurrentUserLanguage
-// } from 'utils/i18n'
 
 import errFun from 'utils/err'
 
-// import {
-//   getAuth
-//   getSign,
-//   getAppKey
-// } from 'utils/encrypt'
-
-const headers = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-}
-
-let cancel
+let cancel = null
 const promiseArr = {}
 // const CancelToken = axios.CancelToken;
-// const lang = getCurrentUserLanguage()
 const instance = axios.create({
   baseURL: '', // !env.isDebug ? process.env.VUE_APP_serverUrl : '',
   timeout: 10000
@@ -66,7 +46,7 @@ instance.interceptors.response.use((response) => {
   const {
     data
   } = response
-  if (data.code === 100 || data.retcode === 0) {
+  if (data.code === 200 || data.retcode === 0) {
     // 正常返回数据，指返回data;
     return response.data
   }
@@ -76,6 +56,31 @@ instance.interceptors.response.use((response) => {
   }
   return data
 })
+
+/**
+ * 根据method设置header相关设置
+ *
+ * @param {*} mtd 当前传入的请求方式
+ * @returns {Object} 返回请求方式和header的contentType设置
+ */
+const setHeaderMethod = mtd => {
+  let method = 'get'
+  let contentType = 'application/json'
+  switch (method) {
+    case 'post':
+    case 'put':
+      method = mtd
+      contentType = 'application/x-www-form-urlencoded'
+      break
+    case 'postJson':
+      method = 'post'
+      break
+  }
+  return {
+    method,
+    contentType
+  }
+}
 
 /**
  * 开发debug下，mock模拟数据
@@ -88,7 +93,7 @@ const setProxy = mockFile => `/mock/${mockFile}`
  *  加工请求参数，默认post
  *
  * @param {*} url 接口地址
- * @param {*} [param={}] 接口参数
+ * @param {*} [params={}] 接口参数
  * @param {*} [opt={
  *  method : 'get' //以get方式请求，默认为post
  *  cache : '缓存名' //接口数据需要缓存时配置，默认不缓存
@@ -96,21 +101,15 @@ const setProxy = mockFile => `/mock/${mockFile}`
  * }]
  * @returns axios params
  */
-const setParams = (url, param = {}, opt = {}) => {
+
+const setParams = (url, params = {}, opt = {}) => {
   promiseArr.isGlobalErr = !!opt.hasErrMsg
   // 所有接口统一参数
-  // param = { // ff80808169dbebfc0169fff1f4e2000b
-  //   uid: getStore(
-  //     'uid'), // || 'C30E3162A04F4A03BD5C8536C817B84D', // 'C30E3162A04F4A03BD5C8536C817B84D', // || '1E25EF55B1F24BB9B1AF6BAC8DBA47F5',
-  //   ...param
-  // }
-  // // token统一配置，支持传入
-  // if (opt.token) {
-  //   param = {
-  //     token: opt.token,
-  //     ...param
-  //   };
-  // }
+  params = {
+    // 参数全局配置
+    // code...
+    ...params
+  }
   // 请求个性化配置
   instance.defaults.customConfig = {
     loading: true,
@@ -122,53 +121,41 @@ const setParams = (url, param = {}, opt = {}) => {
     opt.method = 'get'
     url = setProxy(opt.mockFile)
   }
+  // 设置header和method
+  const {
+    method,
+    contentType
+  } = setHeaderMethod(opt.method)
+
   let curParams = {
+    url,
     headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-      // Authorization,
-      // timestamp,
-      // nonce
-    }
+      'Content-Type': contentType,
+      'xg-token': getStore('token') || opt.token || ''
+    },
+    method
   }
-  // }
-  // get请求和post请求数据区分
-  if (opt.method === 'get') {
+  // get请求和post请求参数和
+  if (method === 'get') {
     curParams = {
-      params: !opt.norSplit ? param : serializeParam(param, opt.norSplit), // axios 默认params 为{}，特殊情况时格式化为&链接
-      method: opt.method,
-      // responseType: 'arraybuffer',
+      params: opt.splitStr ? serializeParam(params, opt.splitStr) : params,
       ...curParams
     }
   } else {
-    curParams.headers = {
-      ...headers,
-      ...curParams.headers,
-      ...opt.headers
-    }
-    if (curParams.headers['Content-Type'] === 'application/x-www-form-urlencoded') {
-      curParams.data = serializeParam(param)
-    } else {
-      curParams.data = param
+    curParams = {
+      data: contentType === 'application/x-www-form-urlencoded' ? serializeParam(params) : params,
+      ...curParams
     }
   }
-  // 请求参数
-  return {
-    method: 'post',
-    url,
-    // cancelToken: new CancelToken((c) => {
-    //   cancel = c;
-    // }),
-    ...curParams
-  }
+  return curParams
 }
 
 export default {
   /**
-   * 同时支持get和post请求
+   * 同时支持get、post、put请求
    *
    * @param {*} url 接口地址
-   * @param {*} [param={}] 接口参数
+   * @param {*} [params={}] 接口参数
    * @param {*} [opt={
    *  type : true, //将params参数以key/value形式拼接,method为get时生效
    *  method : 'get' //以get方式请求，默认为post
@@ -176,19 +163,19 @@ export default {
    * }]
    * @returns prmoise对象
    */
-  fetch (url, param = {}, opt = {}) {
-    const opts = setParams(url, param, opt)
+  fetch (url, params = {}, opt = {}) {
+    const options = setParams(url, params, opt)
     return new Promise((resolve, reject) => {
       // 判断是否需要缓存
       if (opt.cache && getStore(opt.cache)) {
         resolve(getStore(opt.cache))
       } else {
-        instance(opts).then((res) => {
-          if (res.code !== 100 && res.retcode !== 0) {
+        instance(options).then((res) => {
+          if (res.code !== 200 && res.retcode !== 0) {
             if (opt.hasErrMsg) {
               resolve(res)
             } else {
-              reject(res.desc || res.retmsg)
+              reject(res.msg || res.retmsg)
             }
           } else {
             opt.cache && setStore(opt.cache, res.data || res)
@@ -196,6 +183,16 @@ export default {
           }
         }).catch((error) => {
           reject(error)
+        }).finally((a, b, c) => {
+          if (env.debug) {
+            console.log('========== 当前请求 ============')
+            console.log('请求地址：' + url)
+            console.log('请求token：' + getStore('token'))
+            console.log('请求接口参数：' + JSON.stringify(params))
+            console.log('请求配置项：' + JSON.stringify(opt))
+            console.log('返回数据：' + JSON.stringify(a, b, c))
+            console.log('========== 当前请求 =============')
+          }
         })
       }
     })

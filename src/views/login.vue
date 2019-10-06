@@ -10,7 +10,7 @@
         </template>
       </c-input>
     </div>
-    <div class="btn-submit" @click="routerLink('/appointment/list')">登录</div>
+    <div class="btn-submit" @click="routerLink('/')">登录</div>
     <div class="login-register-bottom">
       还没有账号？立即
       <router-link to="/register">

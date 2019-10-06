@@ -39,38 +39,47 @@ export const delCookie = name => {
 /**
  * 存储localStorage
  */
-export const setStore = (name, content) => {
+export const setStore = (name, content, storeType = localStorage) => {
   if (!name) return
   if (typeof content !== 'string') {
     content = JSON.stringify(content)
   }
-  localStorage.setItem(name, content)
+  [storeType].setItem(name, content)
 }
 
 /**
  * 获取localStorage
  */
-export const getStore = name => {
+export const getStore = (name, storeType = localStorage) => {
   if (!name) return
-  let value = localStorage.getItem(name)
+  let value = [storeType].getItem(name)
   if (value && value.indexOf('{') >= 0) {
-    value = JSON.parse(localStorage.getItem(name))
+    value = JSON.parse([storeType].getItem(name))
   }
-  // eslint-disable-next-line consistent-return
   return value
 }
 
 /**
  * 删除localStorage
  */
-export const removeStore = name => {
+export const removeStore = (name, storeType = localStorage) => {
   if (!name) return
-  localStorage.removeItem(name)
+  [storeType].removeItem(name)
 }
 
 /**
  * 删除所有localStorage
  */
-export const clearStore = () => {
-  localStorage.clear()
+export const clearStore = (storeType = localStorage) => {
+  [storeType].clear()
+}
+
+export default {
+  setCookie,
+  getCookie,
+  delCookie,
+  setStore,
+  getStore,
+  removeStore,
+  clearStore
 }

@@ -4,5 +4,5 @@ export default {
   meta: {
     title: '手机号码'
   },
-  component: () => import('@/views/personal/phone.vue')
+  component: () => import('@/views/demos/personal/phone.vue')
 }

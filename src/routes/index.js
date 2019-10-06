@@ -10,7 +10,7 @@ import {
 } from 'utils/store'
 
 import routes from './modules'
-
+console.log(routes)
 const demos = env.isDebug ? require('./demos').modules : {}
 
 const Route = (VueRouter) => {

@@ -1,17 +1,44 @@
 <template>
-  <div id="app" class="c-app">
-    <keep-alive>
-      <router-view class="app" v-if="$route.meta.keepAlive"></router-view>
-    </keep-alive>
-    <router-view class="app" v-if="!$route.meta.keepAlive"></router-view>
+  <div id="app">
+    <transition :name="slideStatus">
+      <router-view/>
+    </transition>
   </div>
 </template>
 <script>
-
+import { mapGetters } from 'vuex'
 export default {
-  name: 'c-app'
+  name: 'c-app',
+  data () {
+    return {
+      slideStatus: 'slide-left'
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'fadeDirection'
+    ])
+  },
+  watch: {
+    '$route' (to, from) {
+      if (this.fadeDirection === 'forward') {
+        this.slideStatus = 'slide-right'
+      } else {
+        this.slideStatus = 'slide-left'
+      }
+    }
+  },
+  mounted () {
+    window.addEventListener(
+      'popstate', () => {
+        this.$store.commit('APP_DIRECTION', 'back')
+      },
+      false
+    )
+  }
 }
+
 </script>
 <style lang='less'>
-@import '~themes/styles/base.less';
+@import "~themes/styles/base.less";
 </style>

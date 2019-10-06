@@ -1,23 +1,22 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-shadow */
-import { getStore } from 'utils'
+import { getStore } from 'utils/store'
 
-const INIT_BUYCART = 'INIT_BUYCART'
+const APP_DIRECTION = 'APP_DIRECTION'
+const CAR_LIST = 'CAR_LIST'
 
 /**
  * vuex的state
  */
 const state = {
-  cartList: [] // 加入购物车列表
+  cartList: [], // 加入购物车列表
+  fadeDirection: 'forward'
 }
 
 /**
  * vuex的getters
  */
 const getters = {
-  cartList: state => state.cartList
+  cartList: state => state.cartList,
+  fadeDirection: state => state.fadeDirection
 }
 
 /**
@@ -25,11 +24,14 @@ const getters = {
  */
 const mutations = {
   // 网页初始化时从本地缓存获取购物车数据
-  [INIT_BUYCART] (state) {
+  [CAR_LIST] (state) {
     const initCart = getStore('buyCart')
     if (initCart) {
       state.cartList = JSON.parse(initCart)
     }
+  },
+  [APP_DIRECTION] (state, payload) {
+    state.fadeDirection = payload
   }
 }
 

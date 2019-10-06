@@ -1,6 +1,6 @@
 <template>
   <div class="no-page">
-    <c-icon class-name="failure"></c-icon>
+    <c-icon name="failure"></c-icon>
     <div class="text">
       未找到頁面，
       <span>{{count}}s</span>後返回首頁

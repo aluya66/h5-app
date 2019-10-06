@@ -4,5 +4,5 @@ export default {
   meta: {
     title: '账号信息'
   },
-  component: () => import('@/views/personal/modify.vue')
+  component: () => import('@/views/demos/personal/modify.vue')
 }

@@ -1,89 +1,28 @@
 @import '../font/iconfont.css';
 @import './reset.less';
+@import './animation.less';
 
 // /* 禁用iPhone中Safari的字号自动调整 */
 *,
 *:before,
 *:after {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    max-height: 100000px; // 解决高清方案下微信字体变大问题 https://github.com/ant-design/ant-design-mobile/issues/732
+	box-sizing: border-box;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	max-height: 100000px; // 解决高清方案下微信字体变大问题 https://github.com/ant-design/ant-design-mobile/issues/732
 }
 
 html {
-    -ms-text-size-adjust: 100%;
-    /* 解决IOS默认滑动很卡的情况 */
-    -webkit-overflow-scrolling: touch;
-    -webkit-user-select: none;
-}
-
-html,
-body,
-div,
-span,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-address,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-samp,
-small,
-strong,
-sub,
-sup,
-var,
-b,
-i,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-textarea,
-td {
-    border: 0 none;
-    font-size: inherit;
-    color: inherit;
-    margin: 0;
-    padding: 0;
-    vertical-align: baseline;
+	-ms-text-size-adjust: 100%;
+	/* 解决IOS默认滑动很卡的情况 */
+	-webkit-overflow-scrolling: touch;
+	-webkit-user-select: none;
 }
 
 body {
-    font-family: "Helvetica Neue", "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
-    color: @text-black;
-    background-color: @background-color;
-    font-size: @f14;
+	font-family: "Helvetica Neue", "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
+	color: @text-black;
+	background-color: @background-color;
+	font-size: @f14;
 }
 
 h1,
@@ -92,23 +31,23 @@ h3,
 h4,
 h5,
 h6 {
-    font-weight: normal;
+	font-weight: normal;
 }
 
 em,
 i,
 strong {
-    font-style: normal;
+	font-style: normal;
 }
 
 ul,
 ol,
 li {
-    list-style: none;
+	list-style: none;
 }
 
 a {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 /* 移动端点击a链接出现蓝色背景问题解决 */
@@ -116,21 +55,21 @@ a:link,
 a:active,
 a:visited,
 a:hover {
-    background: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-tap-highlight-color: transparent;
+	background: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-tap-highlight-color: transparent;
 }
 
 .clearfix:after {
-    content: '';
-    display: block;
-    visibility: hidden;
-    height: 0;
-    clear: both;
+	content: '';
+	display: block;
+	visibility: hidden;
+	height: 0;
+	clear: both;
 }
 
 .clearfix {
-    zoom: 1;
+	zoom: 1;
 }
 
 /* 设置HTML5元素为块 */
@@ -145,17 +84,17 @@ hgroup,
 menu,
 nav,
 section {
-    display: block;
+	display: block;
 }
 
 /* 图片自适应 */
 img {
-    border: none;
-    width: 100%;
-    height: 100%;
-    display: block;
-    -ms-interpolation-mode: bicubic;
-    /* 为了照顾ie图片缩放失真 */
+	border: none;
+	width: 100%;
+	height: 100%;
+	display: block;
+	-ms-interpolation-mode: bicubic;
+	/* 为了照顾ie图片缩放失真 */
 }
 
 /* 禁止缩放表单 */
@@ -164,46 +103,52 @@ input[type='reset'],
 input[type='button'],
 input,
 button {
-    resize: none;
-    border: none;
-    outline: none;
+	resize: none;
+	border: none;
+	outline: none;
 }
 
 
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-    color: @placeholder-color;
-    font-size: @f14;
+	color: @placeholder-color;
+	font-size: @f14;
 }
 
-// botton {
-//     background-color: @white;
-//     color: @label-color;
-//     font-weight: 600;
-
-//     &:disabled {
-//         color: @title-color;
-//     }
-// }
-
 .btn-submit {
-    margin: 40px 12px;
-    padding: 14px 0;
-    text-align: center;
-    border-radius: 4px;
-    background-color: @button-color;
-    color: @white;
-    font-size: @f16;
+	margin: 40px 12px;
+	padding: 14px 0;
+	text-align: center;
+	border-radius: 4px;
+	background-color: @button-color;
+	color: @white;
+	font-size: @f16;
 }
 
 .fix-submit {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    line-height: 50px;
-    font-size: @f16;
-    text-align: center;
-    color: @white;
-    background-color: @active-color;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	line-height: 50px;
+	font-size: @f16;
+	text-align: center;
+	color: @white;
+	background-color: @active-color;
+}
+
+.app-enter {
+	opacity: 0;
+	transform: translateX(100%);
+}
+
+.app-leave-to {
+	opacity: 0;
+	transform: translateX(-100%);
+	position: absolute;
+}
+
+.app-enter-active,
+.app-leave-active {
+	transition: all .6s ease
 }
