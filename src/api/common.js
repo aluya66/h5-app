@@ -1,6 +1,6 @@
 import Http from '../utils/request'
 
-const context = process.env.VUE_APP_serPath
+const context = process.env.VUE_APP_serverPath
 
 /**
  * mock模拟数据 示例

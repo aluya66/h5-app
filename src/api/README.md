@@ -4,14 +4,14 @@
 - 支持直接和间接调用方式，同时支持`async/await`语法
 
 ## 接口调用方式
-> 例如调用`adminLogin`接口
+> 例如调用`checkLogin`接口
 
 - `promise`直接引用
 ```
-    import { adminLogin } from 'api/uams';
+    import { checkLogin } from 'api/common';
 
     // 调用方式
-    adminLogin(params).then(res => {
+    checkLogin(params).then(res => {
         // codeing ...
     })
 ```
@@ -21,7 +21,16 @@
     import innerApi from 'api';
 
     // 调用方式
-    innerApi.uams.adminLogin(params).then(res => {
+    innerApi.common.checkLogin(params).then(res => {
+        // codeing ...
+    })
+```
+
+
+- `promise`间接调用,在mian.js全局引入，vue实例时挂载在原型prototype上，目前项目采用这种
+```
+    // 调用方式
+    this.$api.common.checkLogin(params).then(res => {
         // codeing ...
     })
 ```
@@ -33,7 +42,7 @@
     // method里面调用函数
     async getData(){
         try{
-            const resData = innerApi.uams.adminLogin(params);
+            const resData = innerApi.common.checkLogin(params);
             if(resData.data){
                 // coding ...
             }

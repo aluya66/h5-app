@@ -1,61 +1,82 @@
 <template>
-  <div :class="bem()">
-    <div :class="bem('title')">
-      <div :class="bem('title--left')">
-        <img :src="imgSrc" @click="goBack" alt>
-      </div>
-      <p :class="bem('title--center')">
-        <slot></slot>
-      </p>
-      <p :class="bem('title--right')">
-        <slot name="right"></slot>
-      </p>
+  <van-nav-bar
+    :class="bem()"
+    :fixed="fixed"
+    :title="curTitle"
+    :left-text="leftText"
+    :right-text="rightText"
+    :left-arrow="leftArrow"
+    @click-left="onClickLeft"
+    :border="showBorderBottom"
+    v-bind="$attrs"
+    v-on="$listeners"
+  >
+    <div slot="left" v-if="$slots.left">
+      <slot name="left"></slot>
     </div>
-  </div>
+    <div slot="right" v-if="$slots.right">
+      <slot name="right"></slot>
+    </div>
+  </van-nav-bar>
 </template>
+
 <script>
 import create from 'utils/create/basic'
+import { NavBar } from 'vant'
 
 export default create({
   name: 'header',
+  inheritAttrs: false,
+  components: {
+    [NavBar.name]: NavBar
+  },
   props: {
-    color: {
-      type: String,
-      default: 'white'
+    fixed: {
+      type: Boolean,
+      default: false
     },
-    imgSrc: String
+    title: {
+      type: String,
+      default: ""
+    },
+    leftText: {
+      type: String,
+      default: "返回"
+    },
+    rightText: {
+      type: String,
+      default: ""
+    },
+    leftArrow: {
+      type: Boolean,
+      default: true
+    },
+    showBorderBottom: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    curTitle() {
+      if (this.$route.meta) {
+        const { title } = this.$route.meta
+        if (title) {
+          return this.$t(title)
+        }
+      }
+      return this.title
+    }
   },
   methods: {
-    goBack () {
+    onClickLeft() {
       this.$router.go(-1)
     }
-  }
+  },
 })
 </script>
 
-<style lang='less'>
+<style lang="less">
 .c-header {
-  position: relative;
-  background: @header-bg-color;
-  &__title {
-    display: flex;
-    justify-content: space-between;
-    height: @page-header-height;
-    align-items: center;
-    &--left {
-      img {
-        vertical-align: middle;
-        display: inline-block;
-        width: 10px;
-        height: 17.5px;
-      }
-    }
-    &--right {
-      .fontSize(@f32);
-      color: #006bff;
-      text-align: right;
-      line-height: @f32;
-    }
-  }
+  margin-bottom: @base;
 }
 </style>

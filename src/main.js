@@ -4,15 +4,14 @@ import VueRouter from 'vue-router'
 import importI18n from 'plugins/i18n'
 import registerComponent from 'utils/registerComponent'
 
-import Toast from 'plugins/Toast'
 import route from './routes'
 // 需要用到vuex时，打开
 import store from './store'
 import App from './App.vue'
+import serviceApi from 'api'
 // 通过iconfont使用svg时，打开此项
 // import './themes/default/font/iconfont'
 
-Vue.use(Toast)
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 
@@ -29,8 +28,7 @@ const globalVue = new Vue({
   router: route(VueRouter),
   render: h => h(App),
   beforeCreate () {
-    // 添加全局事件bus
-    Vue.prototype.eventBus = this
+    Vue.prototype.$api = serviceApi
     Vue.prototype.$defaultImg = require('images/img_default_photo.png')
   }
 })

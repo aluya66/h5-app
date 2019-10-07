@@ -27,7 +27,7 @@
 <c-spinner></c-spinner>
 
 <label>c-toast</label>
-<c-toast :content-obj="{title:21212, msg:13213}" show></c-toast>
+<!-- <c-toast :content-obj="{title:21212, msg:13213}" show></c-toast> -->
 
     <!-- <component :is="currentTabComponent" :type="type"></component> -->
   </c-view>

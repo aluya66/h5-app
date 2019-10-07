@@ -44,7 +44,7 @@ export const setStore = (name, content, storeType = localStorage) => {
   if (typeof content !== 'string') {
     content = JSON.stringify(content)
   }
-  [storeType].setItem(name, content)
+  storeType.setItem(name, content)
 }
 
 /**
@@ -52,9 +52,9 @@ export const setStore = (name, content, storeType = localStorage) => {
  */
 export const getStore = (name, storeType = localStorage) => {
   if (!name) return
-  let value = [storeType].getItem(name)
+  let value = storeType.getItem(name)
   if (value && value.indexOf('{') >= 0) {
-    value = JSON.parse([storeType].getItem(name))
+    value = JSON.parse(storeType.getItem(name))
   }
   return value
 }
@@ -64,14 +64,14 @@ export const getStore = (name, storeType = localStorage) => {
  */
 export const removeStore = (name, storeType = localStorage) => {
   if (!name) return
-  [storeType].removeItem(name)
+  storeType.removeItem(name)
 }
 
 /**
  * 删除所有localStorage
  */
 export const clearStore = (storeType = localStorage) => {
-  [storeType].clear()
+  storeType.clear()
 }
 
 export default {

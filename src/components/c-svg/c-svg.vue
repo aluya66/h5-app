@@ -1,5 +1,5 @@
 <template>
-  <svg :class="bem()" aria-hidden="true" v-on="$listeners">
+  <svg :class="[bem(), svgClass]" aria-hidden="true" v-on="$listeners">
     <use :xlink:href="iconName"></use>
   </svg>
 </template>
@@ -13,11 +13,22 @@ export default create({
     name: {
       type: String,
       required: true
+    },
+    className: {
+      type: String,
+      default: ''
     }
   },
   computed: {
     iconName () {
       return `#icon-${this.name}`
+    },
+    svgClass () {
+      if (this.className) {
+        return 'c-svg ' + this.className
+      } else {
+        return ''
+      }
     }
   }
 })
@@ -25,6 +36,7 @@ export default create({
 
 <style scoped>
 .c-svg {
+  font-size: 32px;
   width: 1em;
   height: 1em;
   vertical-align: -0.15em;

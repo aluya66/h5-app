@@ -1,6 +1,6 @@
 import Http from '../utils/request'
 
-const context = process.env.VUE_APP_serPath
+const context = process.env.VUE_APP_serverPath
 
 /**
  * 【 get 】 获取商品列表信息

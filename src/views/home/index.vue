@@ -1,29 +1,24 @@
 <template>
-  <div>
-    <div class="main">
-      <keep-alive>
-        <router-view/>
-      </keep-alive>
-    </div>
-    <van-tabbar v-model="active" @change="changeTabbar(active)">
-      <van-tabbar-item :icon="routeLinks[0].icon">{{routeLinks[0].title}}</van-tabbar-item>
-      <van-tabbar-item :icon="routeLinks[1].icon">{{routeLinks[1].title}}</van-tabbar-item>
-      <van-tabbar-item info="3">
-        <img slot="icon" slot-scope="props" :src="props.active ? icon.active : icon.normal">
-      </van-tabbar-item>
-      <van-tabbar-item :icon="routeLinks[3].icon">{{routeLinks[0].title}}</van-tabbar-item>
-      <van-tabbar-item :icon="routeLinks[4].icon">{{routeLinks[4].title}}</van-tabbar-item>
-    </van-tabbar>
+  <div class="main">
+    <c-header :left-arrow="false">
+      <template v-slot:left>
+        <span>首页</span>
+      </template>
+    </c-header>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
+    <c-tabbar :route-links="routeLinks" :custom-icon="customIcons"></c-tabbar>
   </div>
 </template>
-<script>
 
-import { Tabbar, TabbarItem } from 'vant'
+<script>
+import CHeader from 'components/c-header'
+import CTabbar from 'components/c-tabbar'
 
 export default {
   data () {
     return {
-      active: 0,
       routeLinks: [{
         title: '商品',
         link: '/',
@@ -47,34 +42,22 @@ export default {
         link: '/shop',
         icon: 'shop'
       }],
-      icon: {
+      customIcons: {
         normal: '//img.yzcdn.cn/icon-normal.png',
         active: '//img.yzcdn.cn/icon-active.png'
       }
     }
   },
   components: {
-    [Tabbar.name]: Tabbar,
-    [TabbarItem.name]: TabbarItem
-  },
-  created () {
-    this.changeTabBarActive()
-  },
-  updated () {
-    this.changeTabBarActive()
-  },
-  methods: {
-    changeTabbar (active) {
-      this.$store.commit('APP_DIRECTION', 'forward')
-      this.$router.push(this.routeLinks[active].link)
-    },
-    // 判断路径
-    changeTabBarActive () {
-      this.active = this.routeLinks.findIndex(item => item.link === this.$route.path)
-    }
+    CTabbar,
+    CHeader
   }
 }
 </script>
 
 <style lang="less" scoped>
+.main {
+  height: 100vh;
+  overflow: hidden;
+}
 </style>

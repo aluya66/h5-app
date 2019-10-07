@@ -1,5 +1,5 @@
 <template>
-  <div class="c-qrcode">
+  <div :class="bem()">
     <div v-if="show">
       <img :src="imageUrl" :title="msg">
       <slot></slot>
@@ -9,8 +9,9 @@
 
 <script>
 // import { qrcode } from 'api/innerApi'
+import create from 'utils/create/basic'
 
-export default {
+export default create({
   name: 'qrcode',
   props: {
     msg: String
@@ -37,5 +38,5 @@ export default {
       // })
     }
   }
-}
+})
 </script>

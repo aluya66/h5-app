@@ -131,7 +131,7 @@ const setParams = (url, params = {}, opt = {}) => {
     url,
     headers: {
       'Content-Type': contentType,
-      'xg-token': getStore('token') || opt.token || ''
+      'xg-token': getStore('token') || opt.token || 'ac7232af1afebd5f0ea64c2f5616263b'
     },
     method
   }
