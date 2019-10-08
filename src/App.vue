@@ -1,41 +1,10 @@
 <template>
-  <div id="app">
-    <transition :name="slideStatus">
-      <router-view/>
-    </transition>
-  </div>
+  <app-container id="app" :keepAlive="true"></app-container>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+
 export default {
-  name: 'c-app',
-  data () {
-    return {
-      slideStatus: 'slide-left'
-    }
-  },
-  computed: {
-    ...mapGetters([
-      'fadeDirection'
-    ])
-  },
-  watch: {
-    '$route' (to, from) {
-      if (this.fadeDirection === 'forward') {
-        this.slideStatus = 'slide-right'
-      } else {
-        this.slideStatus = 'slide-left'
-      }
-    }
-  },
-  mounted () {
-    window.addEventListener(
-      'popstate', () => {
-        this.$store.commit('APP_DIRECTION', 'back')
-      },
-      false
-    )
-  }
+  name: 'c-app'
 }
 
 </script>

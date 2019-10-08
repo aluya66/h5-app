@@ -1,3 +1,3 @@
-import CQrcode from './c-qrcode.vue'
+import CQrcode from './qrcode.vue'
 
 export default CQrcode

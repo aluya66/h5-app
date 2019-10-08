@@ -1,3 +1,3 @@
-import CImage from './c-image.vue'
+import CImage from './image.vue'
 
 export default CImage

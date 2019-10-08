@@ -22,7 +22,6 @@
 
 <script>
 import CheckVerify from './mixins/checkVerify'
-import { routerLink } from 'utils'
 
 export default {
   mixins: [CheckVerify],
@@ -33,7 +32,6 @@ export default {
     }
   },
   methods: {
-    routerLink
   }
 }
 </script>

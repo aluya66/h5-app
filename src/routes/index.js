@@ -10,7 +10,6 @@ import {
 } from 'utils/store'
 
 import routes from './modules'
-console.log(routes)
 const demos = env.isDebug ? require('./demos').modules : {}
 
 const Route = (VueRouter) => {
@@ -35,7 +34,6 @@ const Route = (VueRouter) => {
   })
 
   router.beforeEach((to, from, next) => {
-    document.title = (to.meta && to.meta.title) || process.env.VUE_APP_TITLE
     if (to.meta && to.meta.requireAuth) { // 判断该路由是否需要登录权限
       if (getStore('USERINFO')) { // 通过vuex state获取当前的token是否存在
         next()

@@ -1,3 +1,3 @@
-import CHeader from './c-header.vue'
+import CHeader from './header.vue'
 
 export default CHeader

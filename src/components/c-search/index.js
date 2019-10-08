@@ -1,3 +1,3 @@
-import CSearch from './c-search.vue'
+import CSearch from './search.vue'
 
 export default CSearch

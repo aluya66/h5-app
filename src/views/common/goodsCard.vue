@@ -1,5 +1,5 @@
 <template>
-  <div class="flex goods-card">
+  <div class="flex goods-card" @click="routerLink(`/goods/detail/${item.goods_id}`)">
     <div class="flex-sub">
       <c-image :poster-url="item.image_url"></c-image>
     </div>

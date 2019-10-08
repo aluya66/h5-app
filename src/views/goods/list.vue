@@ -18,7 +18,7 @@ export default {
   props: {
     searchObj: {
       type: Object,
-      default() {
+      default () {
         return {}
       }
     },
@@ -27,7 +27,7 @@ export default {
       default: 1
     }
   },
-  data() {
+  data () {
     return {
       listItems: [], // 商品列表数据
       pageInfo: {
@@ -41,12 +41,12 @@ export default {
     }
   },
   watch: {
-    type(val) {
+    type (val) {
       this.resetParams()
       this.getGoodsList()
     },
     searchObj: {
-      handler() {
+      handler () {
         this.resetParams()
         this.getGoodsList()
       },
@@ -54,7 +54,7 @@ export default {
     }
   },
   computed: {
-    hasMore() {
+    hasMore () {
       const { page, total, limit } = this.pageInfo
       if (page >= Math.ceil(total / limit)) {
         return false
@@ -62,22 +62,22 @@ export default {
       return true
     }
   },
-  created() {
+  created () {
     this.getGoodsList()
   },
-  mounted() {
+  mounted () {
     console.log(this.type, this.searchObj, 111)
   },
 
   methods: {
-    resetParams() {
+    resetParams () {
       this.listItems = []
       this.pageInfo.page = 1
       this.finished = false
       this.loading = false
       this.error = false
     },
-    getGoodsList() {
+    getGoodsList () {
       const { page, limit } = this.pageInfo
       const { search } = this.searchObj
       const params = {
@@ -115,7 +115,7 @@ export default {
         this.error = true
       })
     },
-    pullRefresh() {
+    pullRefresh () {
       this.finished = false
       this.loading = false
       this.pageInfo.page = 1

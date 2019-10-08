@@ -1,3 +1,3 @@
-import CTabs from './c-tabs.vue'
+import CTabs from './tabs.vue'
 
 export default CTabs

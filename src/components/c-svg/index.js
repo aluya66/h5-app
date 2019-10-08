@@ -1,3 +1,3 @@
-import CSvg from './c-svg.vue'
+import CSvg from './svg.vue'
 
 export default CSvg

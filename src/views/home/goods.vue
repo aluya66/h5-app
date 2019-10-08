@@ -1,5 +1,10 @@
 <template>
-  <c-view>
+  <layout-view>
+    <c-header slot="header" :left-arrow="false">
+      <template v-slot:left>
+        <span>首页</span>
+      </template>
+    </c-header>
     <c-tabs :tabs="tabs" @change="changeActive"></c-tabs>
     <c-search placeholder="搜索产品款号/名称" @search="onSearch" @clear="onCancel">
       <template v-slot:other>
@@ -7,19 +12,19 @@
       </template>
     </c-search>
     <goods-list :searchObj="searchObj" :type="curType"></goods-list>
-  </c-view>
+  </layout-view>
 </template>
 
 <script>
 import GoodsList from '../goods/list.vue'
-import CTabs from 'components/c-tabs'
-// import CSvg from 'components/c-svg'
+import components from 'components'
+const { CTabs, CSvg } = components
 
 export default {
   components: {
+    GoodsList,
     CTabs,
-    GoodsList
-    // CSvg
+    CSvg
   },
   data () {
     return {
@@ -40,7 +45,7 @@ export default {
   },
   watch: {
     $route (val) {
-      if(val.name === 'goods'){
+      if (val.name === 'goods') {
         this.getGoodsCounts()
       }
     }

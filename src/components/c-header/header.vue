@@ -37,15 +37,15 @@ export default create({
     },
     title: {
       type: String,
-      default: ""
+      default: ''
     },
     leftText: {
       type: String,
-      default: "返回"
+      default: '返回'
     },
     rightText: {
       type: String,
-      default: ""
+      default: ''
     },
     leftArrow: {
       type: Boolean,
@@ -57,7 +57,7 @@ export default create({
     }
   },
   computed: {
-    curTitle() {
+    curTitle () {
       if (this.$route.meta) {
         const { title } = this.$route.meta
         if (title) {
@@ -68,10 +68,10 @@ export default create({
     }
   },
   methods: {
-    onClickLeft() {
+    onClickLeft () {
       this.$router.go(-1)
     }
-  },
+  }
 })
 </script>
 

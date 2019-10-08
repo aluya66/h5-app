@@ -1,3 +1,3 @@
-import CList from './c-list.vue'
+import CList from './list.vue'
 
 export default CList

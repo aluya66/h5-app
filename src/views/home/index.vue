@@ -1,19 +1,11 @@
 <template>
-  <div class="main">
-    <c-header :left-arrow="false">
-      <template v-slot:left>
-        <span>首页</span>
-      </template>
-    </c-header>
-    <keep-alive>
-      <router-view/>
-    </keep-alive>
-    <c-tabbar :route-links="routeLinks" :custom-icon="customIcons"></c-tabbar>
-  </div>
+  <layout-view id="__home">
+    <router-view></router-view>
+    <c-tabbar slot="footer" :route-links="routeLinks" :custom-icon="customIcons"></c-tabbar>
+  </layout-view>
 </template>
 
 <script>
-import CHeader from 'components/c-header'
 import CTabbar from 'components/c-tabbar'
 
 export default {
@@ -49,15 +41,7 @@ export default {
     }
   },
   components: {
-    CTabbar,
-    CHeader
+    CTabbar
   }
 }
 </script>
-
-<style lang="less" scoped>
-.main {
-  height: 100vh;
-  overflow: hidden;
-}
-</style>

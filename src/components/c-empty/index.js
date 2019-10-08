@@ -1,3 +1,3 @@
-import CEmpty from './c-empty.vue'
+import CEmpty from './empty.vue'
 
 export default CEmpty

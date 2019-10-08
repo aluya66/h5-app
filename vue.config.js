@@ -7,10 +7,11 @@
 /* eslint-disable no-param-reassign */
 
 const path = require('path')
-const vConsolePlugin = require('vconsole-webpack-plugin') // 引入 移动端模拟开发者工具 插件 （另：https://github.com/liriliri/eruda）
+const vConsolePlugin = require('vconsole-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin') // Gzip
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const pkg = require('./package.json')
 
 const autoprefixer = require('autoprefixer')
 const pxtorem = require('postcss-pxtorem')
@@ -55,6 +56,21 @@ module.exports = {
       })
       .end()
 
+    // config.module
+    //   .rule('images')
+    //   .use('url-loader')
+    //   .tap(options => {
+    //     return {
+    //       limit: 4096,
+    //       fallback: {
+    //         loader: 'file-loader',
+    //         options: {
+    //           name: `img/[name].v${pkg.version}.[ext]`
+    //         }
+    //       }
+    //     }
+    //   })
+
     config.resolve
       .set('symlinks', false) // https://github.com/vuejs/vue-cli/issues/2675
       .extensions.merge(['.js', '.jsx', '.vue', '.json'])
@@ -80,7 +96,6 @@ module.exports = {
                 // 移除 console
                 // 其它优化选项 https://segmentfault.com/a/1190000010874406
                 compress: {
-                  warnings: false,
                   drop_console: true,
                   drop_debugger: true
                   // pure_funcs: ['console.log']
@@ -128,9 +143,21 @@ module.exports = {
       // 为开发环境修改配置...
       config.plugins = [...config.plugins, ...pluginsDev]
     }
+    // 返回直接 webpack-merge合并
+    return {
+      // 打包编译后的文件名称，模块名称.版本号.js
+      // output: {
+      //   filename: `js/[name].v${pkg.version}.js`,
+      //   chunkFilename: `js/[name].v${pkg.version}.js`
+      // }
+    }
   },
   css: {
     // 是否使用css分离插件 ExtractTextPlugin
+    // extract: env.isDebug ? false : {
+    //   filename: `css/[name].v${pkg.version}.css`,
+    //   chunkFilename: `css/[name].v${pkg.version}.css`
+    // },
     extract: !env.isDebug,
     // 开启 CSS source maps
     sourceMap: false,

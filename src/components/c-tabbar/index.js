@@ -1,3 +1,3 @@
-import CTabbar from './c-tabbar.vue'
+import CTabbar from './tabbar.vue'
 
 export default CTabbar

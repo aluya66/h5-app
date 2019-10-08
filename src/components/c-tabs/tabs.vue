@@ -24,7 +24,7 @@ export default create({
   props: {
     tabs: {
       type: Array,
-      default() {
+      default () {
         return []
       }
     },
@@ -34,7 +34,7 @@ export default create({
     }
   },
   methods: {
-    setTitle(item) {
+    setTitle (item) {
       return item.num ? `${item.title}(${item.num})` : item.title
     }
   }
