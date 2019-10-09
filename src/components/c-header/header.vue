@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import create from 'utils/create/basic'
+import create from 'utils/create'
 import { NavBar } from 'vant'
 
 export default create({

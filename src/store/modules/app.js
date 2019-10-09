@@ -1,4 +1,4 @@
-import { getStore } from 'utils/store'
+import utils from 'utils'
 
 const APP_DIRECTION = 'APP_DIRECTION'
 const CAR_LIST = 'CAR_LIST'
@@ -25,7 +25,7 @@ const getters = {
 const mutations = {
   // 网页初始化时从本地缓存获取购物车数据
   [CAR_LIST] (state) {
-    const initCart = getStore('buyCart')
+    const initCart = utils.getStore('buyCart')
     if (initCart) {
       state.cartList = JSON.parse(initCart)
     }

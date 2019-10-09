@@ -5,8 +5,8 @@
 /**
  * Create a basic component with common options
  */
-import bem from '../mixins/bem'
-import { camelize } from '..'
+import bem from './bem'
+import { camelize } from '../base'
 import { isVal } from '../validate'
 
 function install (Vue) {

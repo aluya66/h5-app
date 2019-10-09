@@ -1,12 +1,12 @@
 <template>
   <layout-view>
-    <!-- <c-tabbar></c-tabbar> -->
+    <c-tabbar></c-tabbar>
   </layout-view>
 </template>
 
 <script>
 import components from 'components'
-const {CTabbar} = components
+const { CTabbar } = components
 
 export default {
   data () {

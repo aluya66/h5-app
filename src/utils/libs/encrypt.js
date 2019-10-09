@@ -7,9 +7,7 @@ import hmacSHA265 from 'crypto-js/hmac-sha256'
 import Base64 from 'crypto-js/enc-base64'
 import md5 from 'crypto-js/md5'
 
-import {
-  serializeParam
-} from './'
+import utils from 'utils'
 
 const APPID = '100000000000000000'
 const APPKEY = 'dc5af4fb5bf04fd6' // sid_health_appkey_ver_1
@@ -72,7 +70,7 @@ export const getAuth = data => `appid="${APPID}",token="${setToken(data, APPKEY)
  * @param {*} data
  * @example appkey=value&qualify_type=value&salt=value&smartid=value&key=secret value
  */
-export const getSign = data => md5(serializeParam({
+export const getSign = data => md5(utils.serializeParam({
   ...md5Params,
   ...data,
   ...SECRET
@@ -82,3 +80,10 @@ export const getSign = data => md5(serializeParam({
  *  返回appkey
  */
 export const getAppKey = () => APPKEY
+
+export default {
+  getSign,
+  getAuth,
+  cryptoSha,
+  cryptoMd5
+}

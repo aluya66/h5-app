@@ -1,6 +1,21 @@
 export default {
   methods: {
     /**
+     * 国际化翻译
+     * @param {*} name 需要处理的i18n 的key值
+     * @param {*} model key对应的对象
+     */
+    translate (name, model) {
+      const hasKey = model ? this.$te(`${model}.${name}`) : this.$te(name)
+
+      if (hasKey) {
+        const curVal = model ? this.$t(`${model}.${name}`) : this.$t(name)
+
+        return curVal
+      }
+      return name
+    },
+    /**
      * 路由跳转，支持push、replace，location
      * @param {*} to
      * @param {*} replace
@@ -36,27 +51,6 @@ export default {
         })
       }
       window.open(routePath, '_blank')
-    },
-
-    /**
-     *  统一消息提示
-     *
-     * @param {string} [message=''] 消息
-     * @param {string} [type='warning'] 类型，error，warning，info
-     */
-    messageTip (msg = '', type = 'warning', time = 1500) {
-      let message = {}
-      if (typeof msg === 'string') {
-        message.msg = ''
-        message.name = msg
-      } else {
-        message = msg
-      }
-      this.$message({
-        message: message.name,
-        type,
-        duration: time
-      })
     },
     /**
      *  统一跳转到登陆页面

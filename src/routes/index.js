@@ -2,22 +2,17 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-else-return */
-import env, {
-  messageTip
-} from 'utils'
-import {
-  getStore
-} from 'utils/store'
+import utils from 'utils'
 
 import routes from './modules'
-const demos = env.isDebug ? require('./demos').modules : {}
+const demos = utils.isDebug ? require('./demos').modules : {}
 
 const Route = (VueRouter) => {
   const router = new VueRouter({
     routes: [...Object.values(routes), ...Object.values(demos)],
-    mode: !env.isDebug ? process.env.VUE_APP_ROUTEMODEL : 'hash',
-    base: !env.isDebug ? process.env.VUE_APP_BASEURLPATH : '',
-    strict: env.isDebug,
+    mode: !utils.isDebug ? process.utils.VUE_APP_ROUTEMODEL : 'hash',
+    base: !utils.isDebug ? process.utils.VUE_APP_BASEURLPATH : '',
+    strict: utils.isDebug,
     scrollBehavior (to, from, savedPosition) {
       if (savedPosition) {
         return savedPosition
@@ -35,10 +30,10 @@ const Route = (VueRouter) => {
 
   router.beforeEach((to, from, next) => {
     if (to.meta && to.meta.requireAuth) { // 判断该路由是否需要登录权限
-      if (getStore('USERINFO')) { // 通过vuex state获取当前的token是否存在
+      if (utils.getStore('USERINFO')) { // 通过vuex state获取当前的token是否存在
         next()
       } else {
-        messageTip('MSGTIP.LOGIN')
+        utils.messageTip('MSGTIP.LOGIN')
         setTimeout(() => {
           next({
             path: '/',

@@ -9,7 +9,7 @@
 
 <script>
 // import { qrcode } from 'api/innerApi'
-import create from 'utils/create/basic'
+import create from 'utils/create'
 
 export default create({
   name: 'qrcode',

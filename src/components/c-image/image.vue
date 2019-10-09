@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import create from 'utils/create/basic'
+import create from 'utils/create'
 import { Image, Lazyload, Loading } from 'vant'
 
 export default create({

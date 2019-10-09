@@ -1,6 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable import/prefer-default-export */
-
 /**
  * 处理路由、数据store，例如 demo.js => {demo: {}}
  *

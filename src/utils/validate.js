@@ -48,6 +48,28 @@ export const isObj = (x) => {
 }
 
 /**
+ * 判断是否为字符串
+ * @param {*} str
+ */
+export const isString = str => {
+  if (typeof str === 'string' || str instanceof String) {
+    return true
+  }
+  return false
+}
+
+/**
+ * 判断是否为数字
+ * @param {*} arg
+ */
+export const isArray = arg => {
+  if (typeof Array.isArray === 'undefined') {
+    return Object.prototype.toString.call(arg) === '[object Array]'
+  }
+  return Array.isArray(arg)
+}
+
+/**
  * 检查是否为移动端，并区分andorid，ios，weixin
  *
  * @returns

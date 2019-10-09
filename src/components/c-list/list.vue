@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import create from 'utils/create/basic'
+import create from 'utils/create'
 import { List, PullRefresh } from 'vant'
 
 export default create({

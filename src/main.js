@@ -1,8 +1,8 @@
 /* eslint-disable import/extensions */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import importI18n from 'plugins/i18n'
-import registerComponent from 'utils/registerComponent'
+import importI18n from './plugins/i18n'
+import registerComponent from './utils/libs/registerComponent'
 import Layout from './layout'
 
 import route from './routes'
@@ -17,7 +17,7 @@ import serviceApi from 'api'
 // import './themes/default/font/iconfont'
 
 // 加入公共的全局methods方法
-import mixin from 'utils/mixins'
+import mixin from './views/mixins'
 Vue.mixin(mixin)
 
 Vue.use(VueRouter)

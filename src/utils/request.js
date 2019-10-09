@@ -1,20 +1,13 @@
 import axios from 'axios'
-import env, {
-  serializeParam
-} from 'utils'
+import utils from 'utils'
 
-import {
-  getStore,
-  setStore
-} from 'utils/store'
-
-import errFun from 'utils/err'
+import errFun from './err'
 
 let cancel = null
 const promiseArr = {}
 // const CancelToken = axios.CancelToken;
 const instance = axios.create({
-  baseURL: '', // !env.isDebug ? process.env.VUE_APP_serverUrl : '',
+  baseURL: '', // !utils.isDebug ? process.env.VUE_APP_serverUrl : '',
   timeout: 10000
 })
 
@@ -52,7 +45,7 @@ instance.interceptors.response.use((response) => {
   }
   // 异常返回数据，返回
   if (!promiseArr.isGlobalErr) {
-    errFun(data)
+    errFun && errFun(data)
   }
   return data
 })
@@ -117,7 +110,7 @@ const setParams = (url, params = {}, opt = {}) => {
   }
 
   // 开发阶段本地mock数据时，以get请求本地文件
-  if (opt.mockFile && env.isDebug) {
+  if (opt.mockFile && utils.isDebug) {
     opt.method = 'get'
     url = setProxy(opt.mockFile)
   }
@@ -131,19 +124,20 @@ const setParams = (url, params = {}, opt = {}) => {
     url,
     headers: {
       'Content-Type': contentType,
-      'xg-token': getStore('token') || opt.token || 'ac7232af1afebd5f0ea64c2f5616263b'
+      'xg-token': utils.getStore('token') || opt.token || 'ac7232af1afebd5f0ea64c2f5616263b'
     },
     method
   }
   // get请求和post请求参数和
   if (method === 'get') {
     curParams = {
-      params: opt.splitStr ? serializeParam(params, opt.splitStr) : params,
+      params: opt.splitStr ? utils.serializeParam(params, opt.splitStr) : params,
       ...curParams
     }
   } else {
     curParams = {
-      data: contentType === 'application/x-www-form-urlencoded' ? serializeParam(params) : params,
+      data: contentType === 'application/x-www-form-urlencoded' ? utils.serializeParam(params)
+        : params,
       ...curParams
     }
   }
@@ -167,8 +161,8 @@ export default {
     const options = setParams(url, params, opt)
     return new Promise((resolve, reject) => {
       // 判断是否需要缓存
-      if (opt.cache && getStore(opt.cache)) {
-        resolve(getStore(opt.cache))
+      if (opt.cache && utils.getStore(opt.cache)) {
+        resolve(utils.getStore(opt.cache))
       } else {
         instance(options).then((res) => {
           if (res.code !== 200 && res.retcode !== 0) {
@@ -178,16 +172,16 @@ export default {
               reject(res.msg || res.retmsg)
             }
           } else {
-            opt.cache && setStore(opt.cache, res.data || res)
+            opt.cache && utils.setStore(opt.cache, res.data || res)
             resolve(opt.hasErrMsg ? res : res.data)
           }
         }).catch((error) => {
           reject(error)
         }).finally((a, b, c) => {
-          if (env.debug) {
+          if (utils.debug) {
             console.log('========== 当前请求 ============')
             console.log('请求地址：' + url)
-            console.log('请求token：' + getStore('token'))
+            console.log('请求token：' + utils.getStore('token'))
             console.log('请求接口参数：' + JSON.stringify(params))
             console.log('请求配置项：' + JSON.stringify(opt))
             console.log('返回数据：' + JSON.stringify(a, b, c))

@@ -9,8 +9,10 @@
   </div>
 </template>
 <script>
-import { setStore, getStore } from 'utils/store'
-let curRoutes = getStore('ROUTERCHAIN', sessionStorage) || []
+import utils from 'utils'
+console.log(utils)
+
+let curRoutes = utils.getStore('ROUTERCHAIN', sessionStorage) || []
 
 export default {
   name: 'app-container',
@@ -43,14 +45,14 @@ export default {
           this.routeChain.push({
             path: route.path
           })
-          setStore('ROUTERCHAIN', JSON.stringify(this.routeChain), sessionStorage)
+          utils.setStore('ROUTERCHAIN', JSON.stringify(this.routeChain), sessionStorage)
           this.addCount++
         }
       }
     },
     popRouteChain () {
       this.routeChain.pop()
-      setStore('ROUTERCHAIN', JSON.stringify(this.routeChain), sessionStorage)
+      utils.setStore('ROUTERCHAIN', JSON.stringify(this.routeChain), sessionStorage)
     },
     setPageDirection ({ dir, to, from }) {
       this.pageDirection = dir

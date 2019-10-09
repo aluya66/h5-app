@@ -1,14 +1,12 @@
 import VueI18n from 'vue-i18n'
 
-import {
-  getCurrentUserLanguage
-} from 'utils/i18n'
+import utils from 'utils'
 import messages from './lang'
 
 export default (Vue) => {
   Vue.use(VueI18n)
   const i18n = new VueI18n({
-    locale: getCurrentUserLanguage(),
+    locale: utils.getCurrentUserLanguage(),
     messages
   })
 

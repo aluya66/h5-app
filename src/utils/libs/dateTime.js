@@ -76,47 +76,6 @@ export function formatTime (time, option) {
   }
 }
 
-export const pickerOptions = {
-  shortcuts: [
-    {
-      text: '今天',
-      onClick (picker) {
-        const end = new Date()
-        const start = new Date(new Date().toDateString())
-        end.setTime(start.getTime() + 3600 * 1000 * 24 - 1)
-        picker.$emit('pick', [start, end])
-      }
-    },
-    {
-      text: '最近一周',
-      onClick (picker) {
-        const end = new Date(new Date().toDateString())
-        const start = new Date()
-        start.setTime(end.getTime() - 3600 * 1000 * 24 * 7)
-        picker.$emit('pick', [start, end])
-      }
-    },
-    {
-      text: '最近一个月',
-      onClick (picker) {
-        const end = new Date(new Date().toDateString())
-        const start = new Date()
-        start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-        picker.$emit('pick', [start, end])
-      }
-    },
-    {
-      text: '最近三个月',
-      onClick (picker) {
-        const end = new Date(new Date().toDateString())
-        const start = new Date()
-        start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-        picker.$emit('pick', [start, end])
-      }
-    }
-  ]
-}
-
 export function getTime (type) {
   if (type === 'start') {
     return new Date().getTime() - 3600 * 1000 * 24 * 90
@@ -136,4 +95,11 @@ export const getCurMonthDays = (y, m) => {
     [y, m] = y.split('-')
   }
   return new Date(y, m, 0).getDate()
+}
+
+export default {
+  fomartDate,
+  formatTime,
+  getTime,
+  getCurMonthDays
 }

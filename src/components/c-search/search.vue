@@ -19,7 +19,7 @@
 
 <script>
 import { Search } from 'vant'
-import create from 'utils/create/basic'
+import create from 'utils/create'
 
 export default create({
   name: 'search',
