@@ -34,7 +34,7 @@ export default {
     }
   },
   methods: {
-    addRouteChain(route) {
+    addRouteChain (route) {
       if (this.addCount === 0 && curRoutes.length > 0) {
         // 排除刷新的时候
         this.addCount = 1
@@ -48,16 +48,16 @@ export default {
         }
       }
     },
-    popRouteChain() {
+    popRouteChain () {
       this.routeChain.pop()
       setStore('ROUTERCHAIN', JSON.stringify(this.routeChain), sessionStorage)
     },
-    setPageDirection({ dir, to, from }) {
+    setPageDirection ({ dir, to, from }) {
       this.pageDirection = dir
       this.routerMap['to'] = to.path
       this.routerMap['from'] = from.path
     },
-    setRouterMap() {
+    setRouterMap () {
       let dir = this.pageDirection
       let to = this.routerMap.to.replace(/\//g, '_')
       let from = this.routerMap.from.replace(/\//g, '_')
@@ -76,7 +76,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     this.$router.beforeEach((to, from, next) => {
       // 定义一个可以记录路由路径变化的数据，这里用sessionStorage,或者在window.routeChain等变量
       let routeLength = this.routeChain.length

@@ -33,8 +33,9 @@ export default {
     width: 100%;
     height: 100%;
     flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
+    // overflow-y: auto;
+    // overflow-x: hidden;
+    overflow: hidden;
     -webkit-overflow-scrolling: touch;
     position: relative;
   }

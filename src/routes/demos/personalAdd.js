@@ -5,5 +5,5 @@ export default {
     title: '添加就诊人',
     keepAlive: true
   },
-  component: () => import('@/views/demos/personal/add.vue')
+  component: () => import('@/demos/personal/add.vue')
 }

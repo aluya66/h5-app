@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import routes from '../../routes/modules'
+import routes from '../routes/modules'
 
 export default {
   name: 'links',

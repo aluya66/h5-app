@@ -71,11 +71,11 @@ export default {
 <style lang='less'>
 .goods-card {
   background-color: @white;
-  .padding-size(@md);
+  .padding-size(@xs);
   margin-top: @xs;
 
   .goods-info {
-    padding-left: @md;
+    padding-left: @xs;
 
     .text-ellipsis {
       margin-bottom: @xs;

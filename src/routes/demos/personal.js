@@ -4,5 +4,5 @@ export default {
   meta: {
     title: '个人中心'
   },
-  component: () => import('@/views/demos/personal/index.vue')
+  component: () => import('@/demos/personal/index.vue')
 }

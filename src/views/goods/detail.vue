@@ -1,16 +1,14 @@
 <template>
   <layout-view>
-    <div class="aa">12121212</div>
-    <div class="bb">12121212</div>
-    <div class="cc">12121212</div>
+    <!-- <c-tabbar></c-tabbar> -->
   </layout-view>
 </template>
 
-
 <script>
+import components from 'components'
+const {CTabbar} = components
 
 export default {
-  name: '',
   data () {
     return {}
   },
@@ -20,6 +18,7 @@ export default {
   },
 
   components: {
+    CTabbar
   }
 }
 </script>
