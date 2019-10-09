@@ -20,6 +20,5 @@ yarn-error.log*
 *.sln
 *.sw*
 
-_bak*
-pubilc/media
 logs
+package-lock.json

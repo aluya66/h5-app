@@ -4,7 +4,8 @@ export default {
     goods: '商品',
     order: '订单',
     customer: '客户',
-    shop: '店铺'
+    shop: '店铺',
+    goodsDetail: '商品详情'
   },
   tip: {
 

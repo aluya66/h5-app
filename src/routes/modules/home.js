@@ -7,7 +7,7 @@ export default {
   path: '/',
   name: 'home',
   meta: {
-    title: 'route.home',
+    title: 'home',
     requireAuth: false
   },
   component: () => import('@/views/home/index.vue'),
@@ -16,7 +16,8 @@ export default {
     name: 'goods',
     component: Goods,
     meta: {
-      title: 'route.goods',
+      title: 'goods',
+      keepAlive: true,
       requireAuth: false
     }
   },
@@ -25,7 +26,7 @@ export default {
     name: 'order',
     component: Order,
     meta: {
-      title: 'route.order',
+      title: 'order',
       requireAuth: false
     }
   },
@@ -34,7 +35,7 @@ export default {
     name: 'customer',
     component: Customer,
     meta: {
-      title: 'route.customer',
+      title: 'customer',
       requireAuth: false
     }
   }, {
@@ -42,7 +43,7 @@ export default {
     name: 'shop',
     component: Shop,
     meta: {
-      title: 'route.shop',
+      title: 'shop',
       requireAuth: false
     }
   }]

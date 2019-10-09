@@ -36,7 +36,7 @@
     ├── utils				- 公共功能模块
     └── views				- 业务模块
         ├── common			- 公共业务组件
-		├── mixins			- mixins 前置钩子
+        ├── mixins			- mixins 前置钩子
         └── home			- 首页
 ```
 

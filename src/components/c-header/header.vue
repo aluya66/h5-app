@@ -61,7 +61,7 @@ export default create({
       if (this.$route.meta) {
         const { title } = this.$route.meta
         if (title) {
-          return this.$t(title)
+          return this.translate(title, 'route')
         }
       }
       return this.title

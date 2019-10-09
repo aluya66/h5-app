@@ -5,5 +5,5 @@ export default {
     title: 'goodsDetail',
     keepAlive: true
   },
-  component: () => import('@/views/goods/detail.vue')
+  component: () => import('@/views/goods/detail/index.vue')
 }

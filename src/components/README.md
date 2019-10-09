@@ -2,7 +2,7 @@
 
 ### 1、组件目录文件说明
 - 组件目录`c-xx`包含`c-xx组件、index、README`三个文件
-    - c-xx.vue 组件文件
+    - xx.vue 组件文件
     - index.js 导出文件
     - README.md 组件说明文件
 
@@ -13,7 +13,7 @@
 ```
     - components
         - c-demo
-            - c-demo.vue
+            - demo.vue
 
 ```
 
